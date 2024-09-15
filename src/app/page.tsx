@@ -19,12 +19,10 @@ export default function Home() {
     if (!isPlaying) return;
 
     const user = [...userSequence, index];
-    console.log("user", user);
     setUserSequence((prevUserSequence) => [...prevUserSequence, index]);
 
     if (user.length <= sequence.length) {
       for (let i = 0; i < user.length; i++) {
-        console.log(user[i], sequence[i]);
         if (user[i] !== sequence[i]) {
           setIsPlaying(false);
           return;
@@ -40,6 +38,7 @@ export default function Home() {
 
   const startGame = () => {
     setSequence([]);
+    setUserSequence([]);
     generateNewRandomIndex();
     setIsPlaying(true);
   };
@@ -48,19 +47,16 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <h1 className="text-4xl font-bold mt-8">Simon Game</h1>
       <h4 className="text-xl">Round {sequence.length}</h4>
-      <p>
-        debug:
-        {sequence.map((index) => EMOJIS[index]).join(" ") || "No sequence"}
-      </p>
-      <p>
-        debug:
-        {userSequence.map((index) => EMOJIS[index]).join(" ") || "No sequence"}
-      </p>
+      <p>{sequence.map((index) => EMOJIS[index]).join(" ")}</p>
+      <p>{userSequence.map((index) => EMOJIS[index]).join(" ")}</p>
       <div className="">
         <ButtonsPanel onButtonClick={handleButtonClick} />
       </div>
       <div>
-        <Button onClick={startGame} disabled={isPlaying}>
+        <Button
+          onClick={startGame}
+          variant={isPlaying ? "destructive" : "default"}
+        >
           {isPlaying ? "Restart!" : "Start"}
         </Button>
       </div>

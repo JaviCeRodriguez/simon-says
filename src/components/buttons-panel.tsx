@@ -11,7 +11,7 @@ export const ButtonsPanel: React.FC<Props> = ({ onButtonClick }) => {
       {COLORS.map((color, index) => (
         <Button
           key={color}
-          className={`bg-${color}-500 hover:bg-${color}-600 w-48 h-48 flex items-center justify-center text-6xl`}
+          className={`rounded-none bg-${color}-500 hover:bg-${color}-600 w-48 h-48 flex items-center justify-center text-6xl`}
           onClick={() => onButtonClick(index)}
         />
       ))}
