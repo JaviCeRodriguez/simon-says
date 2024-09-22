@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { ButtonsPanel } from "@/components/buttons-panel";
-import { COLORS, EMOJIS } from "@/lib/consts";
+import { COLORS } from "@/lib/consts";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -25,6 +27,7 @@ export default function Home() {
       for (let i = 0; i < user.length; i++) {
         if (user[i] !== sequence[i]) {
           setIsPlaying(false);
+          toast.error(`Game Over! Your score is ${sequence.length - 1}`);
           return;
         }
       }
@@ -44,12 +47,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center">
       <h1 className="text-4xl font-bold mt-8">Simon Game</h1>
       <h4 className="text-xl">Round {sequence.length}</h4>
-      <p>{sequence.map((index) => EMOJIS[index]).join(" ")}</p>
-      <p>{userSequence.map((index) => EMOJIS[index]).join(" ")}</p>
-      <div className="">
+      <div className="my-20">
         <ButtonsPanel onButtonClick={handleButtonClick} />
       </div>
       <div>
@@ -60,6 +61,7 @@ export default function Home() {
           {isPlaying ? "Restart!" : "Start"}
         </Button>
       </div>
+      <Toaster position="bottom-center" richColors />
     </main>
   );
 }
