@@ -77,8 +77,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <h1 className="text-4xl font-bold mt-8">Simon Game</h1>
-      <h4 className="text-xl">Round {sequence.length}</h4>
+      <h1 className="text-4xl font-bold mt-8">Round {sequence.length}</h1>
       <div className="my-20">
         <ButtonsPanel
           onButtonClick={handleButtonClick}
